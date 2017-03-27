@@ -37,7 +37,7 @@
         <?php include "header.php"; ?>
         <div class="row">
             <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div id="form-out" class="col-md-6">
                 <h2 id="form-type">Iniciar sesión</h2>
                 <form action="" method="POST">
                     <div class="form-group">
@@ -48,10 +48,13 @@
                         <label for="password">Contraseña:</label>
                         <input type="password" class="form-control" name="password" placeholder="007" maxlength="10" required>
                     </div>
-                    <div id="confirm-register" class="form-group"></div>
-                    <input id="submit-type" type="submit" class="btn btn-success btn-block" name="login" value="¡Inicia sesión!">
+                    <div id="confirm-register" style="display: none;" class="form-group">
+                        <label for='password-confirm'>Confirmar contraseña:</label>
+                        <input type='password' class='form-control' name='password-confirm' placeholder='007' maxlength='10' required>
+                    </div>
+                    <div id="smooth"><input id="submit-type" type="submit" class="btn btn-success btn-block" name="login" value="¡Inicia sesión!">
+                    <a id="change" href="#">¡Regístrate!</a></div>
                 </form>
-                <a id="change" href="#">¡Regístrate!</a>
             </div>
             <div class="col-md-3"></div>
         </div>

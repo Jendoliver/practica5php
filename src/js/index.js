@@ -11,19 +11,21 @@ function change()
     if(type)
     {
         $("#form-type").html("Iniciar sesión");
-        $("#confirm-register").html("");
+        $("#confirm-register").slideUp();
         $("#submit-type").attr("name", "login");
         $("#submit-type").attr("value", "¡Inicia sesión!");
         $("#change").html("¡Regístrate!");
+        $("#smooth").appendTo("form").show();
         type = 0;
     }
     else
     {
         $("#form-type").html("Registro de usuario");
-        $("#confirm-register").html("<label for='password-confirm'>Contraseña:</label><input type='password' class='form-control' name='password-confirm' placeholder='007' maxlength='10' required>");
+        $("#confirm-register").slideDown();
         $("#submit-type").attr("name", "register");
         $("#submit-type").attr("value", "¡Regístrate!");
         $("#change").html("Iniciar sesión");
+        $("#smooth").appendTo("#form-out").show();
         type = 1;
     }
 }
