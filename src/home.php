@@ -27,6 +27,18 @@
         else
             errorBadLogin();
     }
+    else if(isset($_POST["newcard"])) // Newcard u admint
+    {
+        // TODO
+    }
+    else if(isset($_POST["deluser"])) // Dewa
+    {
+        // TODO
+    }
+    else if(isset($_POST["givecard"])) // Noice
+    {
+        // TODO
+    }
     else
     {
     include "header.php"; ?>
@@ -72,11 +84,84 @@
                 <h2>¡BATALLA!</h2>
                 <a href="battle.php" class="btn btn-block btn-danger">¡BATALLA!</a>
             </article>
-        </div>
-        <div class="col-md-1"></div>
-    </div>
     <?php } if($_SESSION["usertype"] == 1) { ?> <!-- ADMIN SECTION -->
-    
-    <?php } }  ?>
+            <!-- CARD ADDITION -->
+            <article id="newcard" class="well">
+                <h2>Crear nuevas cartas</h2>
+                <form action="" method="POST">
+                    <div class="form-group">
+                        <label for="name"><span class="glyphicon glyphicon-chevron-right"></span> Nombre de la carta:</label>
+                        <input type="text" class="form-control" name="name" maxlength="30" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="type"><span class="glyphicon glyphicon-chevron-right"></span> Tipo de carta:</label>
+                        <select class="form-control" name="type" required>
+                            <option value="Tropa">Tropa</option>
+                            <option value="Estructura">Estructura</option>
+                            <option value="Hechizo">Hechizo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rarity"><span class="glyphicon glyphicon-chevron-right"></span> Calidad de la carta:</label>
+                        <select class="form-control" name="rarity" required>
+                            <option value="Común">Común</option>
+                            <option value="Especial">Especial</option>
+                            <option value="Épica">Épica</option>
+                            <option value="Legendaria">Legendaria</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="hp"><span class="glyphicon glyphicon-chevron-right"></span> Vida de la carta:</label>
+                        <input type="number" class="form-control" name="hp" min="1" max="20" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dmg"><span class="glyphicon glyphicon-chevron-right"></span> Daño de la carta:</label>
+                        <input type="number" class="form-control" name="dmg" min="1" max="20" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cost"><span class="glyphicon glyphicon-chevron-right"></span> Coste de la carta:</label>
+                        <input type="number" class="form-control" name="cost" min="1" max="10" required>
+                    </div>
+                    <input id="submit-type" type="submit" class="btn btn-primary btn-block" name="newcard" value="¡Crear carta!">
+                </form>
+            </article>
+            <!-- BEST PLAYERS -->
+            <article id="bestplayers" class="well">
+                <h2>Los mejores jugadores</h2>
+                <?php tableBestPlayers(); ?>
+            </article>
+            <!-- DELETE USER -->
+            <article id="deleteuser" class="well">
+                <h2>Eliminar a un usuario</h2>
+                <form action="" method="POST">
+                    <div class="form-group">
+                        <label for="name"><span class="glyphicon glyphicon-chevron-right"></span> Nombre del usuario:</label>
+                        <select class="form-control" name="user">
+                            <?php selectAllUsers(); ?>
+                        </select>
+                    </div>
+                    <input id="submit-type" type="submit" class="btn btn-danger btn-block" name="deluser" value="ELIMINAR USUARIO">
+                </form>
+            </article>
+            <!-- GIVE CARD -->
+            <article id="givecard" class="well">
+                <h2>Dar carta a un jugador</h2>
+                <form action="" method="POST">
+                    <div class="form-group">
+                        <label for="name"><span class="glyphicon glyphicon-chevron-right"></span> Nombre del usuario:</label>
+                        <select class="form-control" name="user">
+                            <?php selectAllUsers(); ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name"><span class="glyphicon glyphicon-chevron-right"></span> Nombre de la carta:</label>
+                        <select class="form-control" name="user">
+                            <?php selectAllCards(); ?>
+                        </select>
+                    </div>
+                    <input id="submit-type" type="submit" class="btn btn-success btn-block" name="deluser" value="¡Regalar carta!">
+                </form>
+            </article>
+    <?php } ?> </div><div class="col-md-1"></div></div> <?php }  ?>
 </body>
 </html>

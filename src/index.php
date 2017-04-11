@@ -13,7 +13,7 @@
     <?php if(!empty($_POST)) { require "libs/inserts.php"; session_start();
         if(isset($_POST["login"]))
         {
-            if($_SESSION["usertype"] = checkLogin($_POST["username"], $_POST["password"]))
+            if(checkLogin($_POST["username"], $_POST["password"]))
             {
                 getSession($_POST["username"]);
                 header("Location: $home"); 
@@ -28,7 +28,6 @@
                 if(insertUser($_POST["username"], $_POST["password"]))
                 {
                     require "libs/cards.php";
-                    $_SESSION["usertype"] = 0;
                     reward($_POST["username"]);
                     getSession($_POST["username"]);
                     header("Location: $home");
