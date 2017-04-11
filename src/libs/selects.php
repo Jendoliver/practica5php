@@ -4,24 +4,49 @@
 *   selects.php: Librería de funciones SELECT
 *
 */
-require "bbdd.php";
+require_once "bbdd.php";
 
 function checkLogin($username, $password)
 {
     $con = connect($GLOBALS['db']);
-    if($res = mysqli_query($con, "SELECT * FROM user WHERE username = '$username' AND password = '$password';"))
+    $res = mysqli_query($con, "SELECT * FROM user WHERE username = '$username' AND password = '$password';");
+    disconnect($con);
+    return mysqli_num_rows($res) > 0;
+}
+
+/****** USERS ******/
+function getPassword($username)
+{
+    $con = connect($GLOBALS['db']);
+    $res = mysqli_query($con, "SELECT password FROM user WHERE username = '$username';");
+    disconnect($con);
+    $row = mysqli_fetch_row($res);
+    return $row[0];
+}
+
+function getSession($username)
+{
+    session_start();
+    $con = connect($GLOBALS['db']);
+    $res = mysqli_query($con, "SELECT * FROM user WHERE username = '$username';");
+    disconnect($con);
+    $row = mysqli_fetch_assoc($res);
+    extract($row);
+    $_SESSION["username"] = $username;
+    $_SESSION["wins"] = $wins;
+    $_SESSION["level"] = $level;
+}
+
+function selectCards($username)
+{
+    $con = connect($GLOBALS['db']);
+    $res = mysqli_query($con, "SELECT * FROM deck WHERE user = '$username';");
+    $options = "";
+    while($row = mysqli_fetch_assoc($res))
     {
-        disconnect($con);
-        errorBadLogin();
-        if(mysqli_num_rows($res))
-        {
-            $row = mysqli_fetch_assoc($res);
-            return $row["type"];
-        }
-        else
-            return 2; // No existe
+        extract($row);
+        $options .= "<option value='$card'>$card - Nivel: $level</option>";
     }
-    else
-        errorQuery($con);
+    echo $options;
     disconnect($con);
 }

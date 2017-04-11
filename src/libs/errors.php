@@ -4,7 +4,7 @@
 *   errors.php: Librería de errores de la aplicación
 *
 */
-require "constants.php";
+require_once "constants.php";
 
 /********** MODELOS DE ERROR **********/
 function alertError($message, $newlocation)
@@ -22,6 +22,12 @@ function errorQuery($con)
 }
 
 /********** ERRORES COMUNES **********/
+function permisionDenied()
+{
+    global $index;
+    alertError("No tienes acceso", $index);
+}
+
 function errorBadLogin()
 {
     global $index;
@@ -32,6 +38,18 @@ function errorPasswordConfirm()
 {
     global $index;
     alertError("Las contraseñas no coinciden", $index);
+}
+
+function errorBadPassword()
+{
+    global $home;
+    alertError("Contraseña actual incorrecta", $home);
+}
+
+function errorChangePassword()
+{
+    global $home;
+    alertError("Las contraseñas no coinciden o has introducido la misma que ya tenías", $home);
 }
 
 function errorUserAlreadyExists()

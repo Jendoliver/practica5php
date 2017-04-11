@@ -13,5 +13,9 @@ $dbpass = "";
 
 /****** RUTAS ******/
 $index = "/src/index.php";
-$userhome = "/src/userhome.php";
-$adminhome = "/src/adminhome.php";
+$home = "/src/home.php";
+
+/****** APP ******/
+$REWARD = 3;
+$HP_RATIO = 2;
+$DMG_RATIO = 2;

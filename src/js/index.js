@@ -15,7 +15,6 @@ function change()
         $("#submit-type").attr("name", "login");
         $("#submit-type").attr("value", "¡Inicia sesión!");
         $("#change").html("¡Regístrate!");
-        $("#smooth").appendTo("form").show();
         type = 0;
     }
     else
@@ -25,7 +24,6 @@ function change()
         $("#submit-type").attr("name", "register");
         $("#submit-type").attr("value", "¡Regístrate!");
         $("#change").html("Iniciar sesión");
-        $("#smooth").appendTo("#form-out").show();
         type = 1;
     }
 }

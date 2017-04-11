@@ -10,23 +10,31 @@
     <title>STUCOM ROYALE!</title>
 </head>
 <body>
-    <?php if(!empty($_POST)) { require "libs/inserts.php";
+    <?php if(!empty($_POST)) { require "libs/inserts.php"; session_start();
         if(isset($_POST["login"]))
         {
-            switch(checkLogin($_POST["username"], $_POST["password"]))
+            if($_SESSION["usertype"] = checkLogin($_POST["username"], $_POST["password"]))
             {
-                case 0: header("Location: $userhome"); break;
-                case 1: header("Location: $adminhome"); break;
-                case 2: errorBadLogin();
+                getSession($_POST["username"]);
+                header("Location: $home"); 
             }
+            else
+                errorBadLogin();
         }
         else
         {
-            if($_POST["password"] == $_POST["password-confirm"])
+            if($_POST["password"] == $_POST["password-confirm"]) // Si coinciden las password
             {
                 if(insertUser($_POST["username"], $_POST["password"]))
-                    header("Location: $userhome");
-                errorUserAlreadyExists();
+                {
+                    require "libs/cards.php";
+                    $_SESSION["usertype"] = 0;
+                    reward($_POST["username"]);
+                    getSession($_POST["username"]);
+                    header("Location: $home");
+                }
+                else
+                    errorUserAlreadyExists();
             }
             else
                 errorPasswordConfirm();
@@ -49,8 +57,8 @@
                         <input type="password" class="form-control" name="password" placeholder="007" maxlength="10" required>
                     </div>
                     <div id="confirm-register" style="display: none;" class="form-group">
-                        <label for='password-confirm'>Confirmar contraseña:</label>
-                        <input type='password' class='form-control' name='password-confirm' placeholder='007' maxlength='10' required>
+                        <label for="password-confirm">Confirmar contraseña:</label>
+                        <input type="password" class="form-control" name="password-confirm" placeholder="007" maxlength="10">
                     </div>
                     <div id="smooth"><input id="submit-type" type="submit" class="btn btn-success btn-block" name="login" value="¡Inicia sesión!">
                     <a id="change" href="#">¡Regístrate!</a></div>
