@@ -13,10 +13,9 @@
     if(empty($_SESSION["username"])) { // Are you logged in
         include "libs/errors.php";
         permisionDenied();
-    } else {
+    } else { require_once "libs/updates.php"; require_once "libs/selects.php"; require_once "libs/inserts.php"; require_once "libs/deletes.php";
     if(isset($_POST["changepass"])) // Password change maybe
     {
-        require_once "libs/updates.php"; require_once "libs/selects.php";
         if($_POST["password-act"] == getPassword($_SESSION["username"]))
         {
             if($_POST["password"] == $_POST["password-confirm"] && $_POST["password"] != $_POST["password-act"])
@@ -29,15 +28,22 @@
     }
     else if(isset($_POST["newcard"])) // Newcard u admint
     {
-        // TODO
+        extract($_POST);
+        if(insertCard($name, $type, $rarity, $hp, $dmg, $cost)) // TODO
+            cardCreated();
+        errorCardAlreadyExists();
     }
     else if(isset($_POST["deluser"])) // Dewa
     {
-        // TODO
+        extract($_POST);
+        if(deleteUser($user)) // TODO
+            userDeleted();
     }
     else if(isset($_POST["givecard"])) // Noice
     {
-        // TODO
+        extract($_POST);
+        if(giveCard($card, $user))
+            cardGiven();
     }
     else
     {
@@ -155,11 +161,11 @@
                     </div>
                     <div class="form-group">
                         <label for="name"><span class="glyphicon glyphicon-chevron-right"></span> Nombre de la carta:</label>
-                        <select class="form-control" name="user">
+                        <select class="form-control" name="card">
                             <?php selectAllCards(); ?>
                         </select>
                     </div>
-                    <input id="submit-type" type="submit" class="btn btn-success btn-block" name="deluser" value="¡Regalar carta!">
+                    <input id="submit-type" type="submit" class="btn btn-success btn-block" name="givecard" value="¡Regalar carta!">
                 </form>
             </article>
     <?php } ?> </div><div class="col-md-1"></div></div> <?php }  ?>

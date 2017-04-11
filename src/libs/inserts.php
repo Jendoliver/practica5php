@@ -34,3 +34,9 @@ function insertNewCardTo($card, $user)
     disconnect($con);
     return 0;
 }
+
+/****** TABLA CARD ******/
+function insertCard($name, $type, $rarity, $hp, $dmg, $cost)
+{
+    // TODO
+}

@@ -57,3 +57,9 @@ function errorUserAlreadyExists()
     global $index;
     alertError("El usuario ya existe", $index);
 }
+
+function errorCardAlreadyExists()
+{
+    global $home;
+    alertError("Ya existe una carta con ese nombre", $home);
+}
