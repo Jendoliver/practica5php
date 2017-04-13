@@ -28,7 +28,7 @@
                 if(insertUser($_POST["username"], $_POST["password"]))
                 {
                     require "libs/cards.php";
-                    reward($_POST["username"]);
+                    $_SESSION["reward"] = 1;
                     getSession($_POST["username"]);
                     header("Location: $home");
                 }

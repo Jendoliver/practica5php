@@ -61,6 +61,23 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
+            <?php if($_SESSION["reward"]) { require_once "libs/cards.php"; $rewards = reward($_SESSION["username"]); ?>
+            <!-- REWARD -->
+            <article id="reward" class="well">
+                <h2>¡Nuevas cartas!</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <?php echo $rewards[0]; ?>
+                    </div>
+                    <div class="col-md-4">
+                        <?php echo $rewards[1]; ?>
+                    </div>
+                    <div class="col-md-4">
+                        <?php echo $rewards[2]; ?>
+                    </div>
+                </div>
+            </article>
+            <?php } $_SESSION["reward"] = 0; ?>
             <!-- PERSONAL INFO -->
             <article id="info" class="well">
                 <h2>Información personal</h2>
@@ -90,7 +107,7 @@
             </article>
             <!-- CARDS COLLECTION -->
             <article id="collection" class="well">
-                <?php require "libs/cards.php"; ?>
+                <?php require_once "libs/cards.php"; ?>
                 <h2>Tu colección de cartas</h2>
                 <?php cardTable($username); ?>
             </article>

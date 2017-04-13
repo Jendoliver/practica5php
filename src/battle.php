@@ -107,7 +107,7 @@
     if(($_SESSION["wins"])%5 == 0 && $winner != "CPU") 
     {
         echo "<h2>¡Cofre desbloqueado!</h2>";
-        reward($winner);
+        $_SESSION["reward"] = 1;
     }
     $_SESSION["win-rounds"] = 0; ?>
     <a href="home.php" class="btn btn-primary">¡A mi perfil!</a>

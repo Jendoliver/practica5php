@@ -84,21 +84,20 @@ function giveCardTo($card, $user) // Da una carta a un usuario e imprime sus car
                 Vida: $hitpoints\n
                 Daño: $damage\n
                 Coste de elixir: $cost";
-    echo $message;
-    echo "<script type='text/javascript'>
-    window.alert('$message');
-    </script>";
+    return $message;
 }
 
 function reward($user)
 {
     global $REWARD;
     $cards = getAllCards();
+    $messages = array();
     for($i=0; $i<$REWARD; $i++)
     {
         $cardgiven = rand(0, getNCards()-1);
-        giveCardTo($cards[$cardgiven], $user);
+        $messages[] = giveCardTo($cards[$cardgiven], $user);
     }
+    return $messages;
 }
 
 function cardTable($user)
