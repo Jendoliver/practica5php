@@ -25,7 +25,7 @@ function errorQuery($con)
 function permisionDenied()
 {
     global $index;
-    alertError("No tienes acceso", $index);
+    alertError("Acceso denegado, inicia sesión primero", $index);
 }
 
 function errorBadLogin()

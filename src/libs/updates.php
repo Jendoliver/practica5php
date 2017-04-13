@@ -21,6 +21,14 @@ function lvlUpCard($card, $user)
     return 1;
 }
 
+function lvlUpUser($user)
+{
+    $con = connect($GLOBALS['db']);
+    mysqli_query($con, "UPDATE user SET level = level + 1 WHERE username = '$user';");
+    disconnect($con);
+    return 1;
+}
+
 function updatePassword($username, $newpass)
 {
     global $home;

@@ -42,13 +42,22 @@
     else if(isset($_POST["givecard"])) // Noice
     {
         extract($_POST);
-        if(giveCard($card, $user))
+        if(giveCardAdmin($card, $user))
             cardGiven();
     }
     else
     {
+    getSession($_SESSION["username"]);
     include "header.php"; ?>
-    <h1 style="text-align: center;">¡Bienvenido, <?php echo $_SESSION["username"]; ?>!</h1>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"><h1 style="text-align: center;">¡Bienvenido, <?php echo $_SESSION["username"]; ?>!</h1></div>
+        <div class="col-md-4">
+            <div class="col-md-6"></div>
+            <div class="col-md-3"><a href="logout.php" class="btn btn-block btn-danger">Cerrar sesión</a></div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">

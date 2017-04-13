@@ -35,8 +35,41 @@ function insertNewCardTo($card, $user)
     return 0;
 }
 
+function giveCardAdmin($card, $user)
+{
+    if(insertNewCardTo($card, $user))
+        return 1;
+    else
+    {
+        require_once "updates.php";
+        lvlUpCard($card, $user);
+        return 1;
+    }
+    return 0;
+    
+}
+function cardGiven()
+{
+    global $home;
+    alertError("Carta entregada con éxito", $home);
+}
+
 /****** TABLA CARD ******/
+function cardCreated()
+{
+    global $home;
+    alertError("Carta creada con éxito", $home);
+}
+
 function insertCard($name, $type, $rarity, $hp, $dmg, $cost)
 {
-    // TODO
+    $con = connect($GLOBALS['db']);
+    $insert = "INSERT INTO card VALUES('$name', '$type', '$rarity', $hp, $dmg, $cost);";
+    if(mysqli_query($con, $insert))
+    {
+        disconnect($con);
+        return 1;
+    }
+    disconnect($con);
+    return 0;
 }

@@ -86,7 +86,7 @@ function giveCardTo($card, $user) // Da una carta a un usuario e imprime sus car
                 Coste de elixir: $cost";
     echo $message;
     echo "<script type='text/javascript'>
-    alert('$message');
+    window.alert('$message');
     </script>";
 }
 

@@ -49,18 +49,18 @@
     <?php } else if(isset($_POST["fase2"])) // FASE 3
     {
         if($_SESSION["win-rounds"] > 2) $_SESSION["win-rounds"] = 0; // Punish for cheating
-        $cards = getAllCards();
         $rand = rand(0, getNCards()-1);
-        $cardcpu = $cards[$rand];
+        $randcpu = rand(0, 3);
+        $rarities = array("Común", "Especial", "Épica", "Legendaria");
+        $raritycpu = $rarities[$randcpu];
         $carduserinfo = getCardInfo($_POST["cardchosen"]);
-        $cardcpuinfo = getCardInfo($cardcpu);
-        if($carduserinfo["rarity"] == $cardcpuinfo["rarity"])
+        if($carduserinfo["rarity"] == $raritycpu)
         {
             $fase2 = "¡El jugador gana la segunda fase! ¡Las rarezas de cartas coinciden! (".$carduserinfo["rarity"].")";
             $_SESSION["win-rounds"]++;
         }
         else
-            $fase2 = "¡El jugador pierde la segunda fase! Rareza del jugador: ".$carduserinfo["rarity"]." --- Rareza de la CPU: ".$cardcpuinfo["rarity"];
+            $fase2 = "¡El jugador pierde la segunda fase! Rareza del jugador: ".$carduserinfo["rarity"]." --- Rareza de la CPU: ".$raritycpu;
     ?>
     <h1>¡FASE 3!</h1>
     <h3>Resultados de la fase 2: <?php echo $fase2; ?></h3>
@@ -87,7 +87,7 @@
             $_SESSION["win-rounds"]++;
         }
         else
-            $fase3 = "¡El jugador pierde la tercera fase! ¡El coste de elixir de su carta es más bajo! (".$card["cost"]." < ".$randnum.")";
+            $fase3 = "¡El jugador pierde la tercera fase! ¡El coste de elixir de su carta es igual o más bajo! (".$card["cost"]." =< ".$randnum.")";
         if($_SESSION["win-rounds"] > 1) 
         {
             $winner = $_SESSION["username"]; 
@@ -98,7 +98,12 @@
     <h1>¡Batalla terminada!</h1>
     <h3>Resultados de la fase 3: <?php echo $fase3; ?></h3>
     <h2>Ganador: <?php echo $winner; ?></h2>
-    <?php if(($_SESSION["wins"])%10 == 0 && $winner != "CPU") echo "<h1>¡Has subido de nivel!</h1>";
+    <?php 
+    if(($_SESSION["wins"])%10 == 0 && $winner != "CPU") 
+    {
+        echo "<h1>¡Has subido de nivel!</h1>";
+        lvlUpUser($_SESSION["username"]);
+    }
     if(($_SESSION["wins"])%5 == 0 && $winner != "CPU") 
     {
         echo "<h2>¡Cofre desbloqueado!</h2>";
