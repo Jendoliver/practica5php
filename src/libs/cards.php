@@ -48,7 +48,7 @@ function getCardLvl($cardname, $username) // Devuelve el nivel de una carta
     $con = connect($GLOBALS['db']);
     $res = mysqli_query($con, "SELECT level FROM deck WHERE user = '$username' AND card = '$cardname';");
     $row = mysqli_fetch_row($res);
-    return $row[2];
+    return $row[0];
 }
 
 function getCardStats($cardname, $username) // Devuelve la info de la carta de un usuario (afecta lvl usuario)
